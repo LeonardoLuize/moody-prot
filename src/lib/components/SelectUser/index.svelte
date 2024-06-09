@@ -5,9 +5,14 @@
     id: number;
     name: string;
     image: string;
+    metrics: {
+      id: number;
+      name: string;
+      interactions: number;
+    }[];
   }
 
-  export let users: User[]
+  export let users: User[];
   export let selectedUser: number = 0;
 
   onMount(() => {
@@ -21,7 +26,9 @@
   }
 </script>
 
-<div class="w-full flex justify-around gap-10 mt-5">
+<div
+  class="w-full flex justify-around gap-10 mt-5 pb-3 overflow-x-auto scrollbar-custom"
+>
   {#each users as user}
     <label
       class={`flex gap-3 w-full bg-primary-100 border-2 cursor-pointer ${
@@ -45,16 +52,41 @@
 
         <span class="text-sm mt-2">Gosta de:</span>
         <div class="flex items-center mt-1 gap-2">
-          <span
-            class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
-            >Café</span
-          >
-          <span
-            class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
-            >Sushi</span
-          >
+          {#each user.metrics as metric}
+            <span
+              class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
+              >{metric.name}</span
+            >
+          {/each}
         </div>
       </div>
     </label>
   {/each}
 </div>
+
+<style>
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 12px; /* Largura da barra de rolagem vertical */
+    height: 12px; /* Altura da barra de rolagem horizontal */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo da trilha da barra de rolagem */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #888; /* Cor do polegar (a parte que se move) da barra de rolagem */
+    border-radius: 10px; /* Bordas arredondadas do polegar */
+    border: 3px solid #f1f1f1; /* Espaçamento entre o polegar e a trilha */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Cor do polegar ao passar o mouse */
+  }
+
+  /* Estilos para Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin; /* Barra de rolagem fina */
+    scrollbar-color: #c5c5c5 #f1f1f1; /* Cor do polegar e da trilha */
+  }
+</style>
