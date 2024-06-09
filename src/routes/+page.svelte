@@ -100,7 +100,7 @@
   function handleHelp() {
     let modalBody = '<p>';
     modalBody +=
-      'Esse é o protótipo do nosso motor de recomendação de lugares. Para utilizar basta selecionar um usuário e intergir com as recomendações, ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos!';
+      'Esse é o protótipo do nosso motor de recomendação de lugares. Para utilizar basta selecionar um usuário e interagir com as recomendações, ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos!';
     modalBody += '</p>';
     modalBody +=
       "<p class='py-3 px-5 bg-primary-200 text-primary-600 border-2 border-primary-500 mt-5 rounded-xl'>";
