@@ -98,10 +98,21 @@
   }
 
   function handleHelp() {
+    let modalBody = '<p>';
+    modalBody +=
+      'Esse é o protótipo do nosso motor de recomendação de lugares. Para utilizar basta selecionar um usuário e intergir com as recomendações, ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos!';
+    modalBody += '</p>';
+    modalBody +=
+      "<p class='py-3 px-5 bg-primary-200 text-primary-600 border-2 border-primary-500 mt-5 rounded-xl'>";
+    modalBody +=
+      'Importante ressaltar que a ideia do protótipo é mostrar como o motor de recomendação funciona, portanto não é possível navegar pelos lugares e por mias que os dados venham da api eles são fictícios.';
+    modalBody += '</p>';
+
     const modal: ModalSettings = {
-      type: 'confirm',
+      type: 'alert',
       title: 'Como Usar?',
-      body: 'Esse é o protótipo do nosso motor de recomendação de lugares, para utilizar basta selecionar um usuário e intergir com as recomendações, ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos.',
+      body: modalBody,
+      buttonTextCancel: 'Entendi!',
     };
     modalStore.trigger(modal);
     localStorage.setItem('help', 'true');
