@@ -1,1 +1,12 @@
-<slot></slot><script>import "../app.css";</script><style></style>
+<script>
+  import '../app.css';
+  import { initializeStores, Modal } from '@skeletonlabs/skeleton';
+
+  initializeStores();
+</script>
+
+<Modal />
+
+<slot />
+
+<style></style>

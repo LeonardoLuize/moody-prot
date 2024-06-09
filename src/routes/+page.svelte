@@ -4,6 +4,9 @@
   import SelectUser from '$lib/components/SelectUser/index.svelte';
   import Place from '$lib/components/Place/index.svelte';
   import { onMount } from 'svelte';
+  import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+
+  const modalStore = getModalStore();
 
   let selectedUser = 1;
   let users = [
@@ -178,6 +181,21 @@
       });
     });
   });
+
+  function handleHelp() {
+    const modal: ModalSettings = {
+      type: 'confirm',
+      title: 'Como Usar?',
+      body: 'Esse é o protótipo do nosso motor de recomendação de lugares, para utilizar basta selecionar um usuário e intergir com as recomendações ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos.',
+    };
+    modalStore.trigger(modal);
+    localStorage.setItem('help', 'true');
+  }
+
+  onMount(() => {
+    const needHelp = localStorage.getItem('help');
+    if (needHelp !== 'true') handleHelp();
+  });
 </script>
 
 <div>
@@ -190,8 +208,12 @@
       <span class="text-2xl font-thin tracking-[0.1em]">Prototipe</span>
     </div>
 
-    <button class="btn ml-auto variant-filled-primary mr-5 w-[90%] md:w-fit"
-      >Como Usar?</button
+    <button
+      on:click={handleHelp}
+      class="btn ml-auto variant-filled-primary mr-5 w-[90%] md:w-fit gap-2"
+    >
+      <span class="material-symbols-rounded"> help </span>
+      Como Usar?</button
     >
   </header>
 
