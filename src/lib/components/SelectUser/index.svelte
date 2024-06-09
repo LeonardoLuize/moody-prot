@@ -15,11 +15,6 @@
   export let users: User[];
   export let selectedUser: number = 0;
 
-  onMount(() => {
-    // Fetch users data from API or any other source
-    // and update the 'users' array
-  });
-
   function handleUserSelection(event: Event): void {
     const target = event.target as HTMLInputElement;
     selectedUser = parseInt(target.value, 10);
