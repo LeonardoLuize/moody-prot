@@ -17,84 +17,19 @@
     }[];
   }
 
+  interface Place {
+    id: number;
+    name: string;
+    image: string;
+    rating: number;
+    likes: number;
+  }
+
   const modalStore = getModalStore();
 
   let selectedUser = 1;
   let users: User[] = [];
-  let places = [
-    {
-      name: 'Café do Ponto',
-      image: 'https://picsum.photos/300/300',
-      rating: 4.5,
-      likes: 10,
-    },
-    {
-      name: 'Pizzaria Bella',
-      image: 'https://picsum.photos/200/300',
-      rating: 4.5,
-      likes: 12,
-    },
-    {
-      name: 'Hamburgueria',
-      image: 'https://picsum.photos/205/330',
-      rating: 4.3,
-      likes: 18,
-    },
-    {
-      name: 'Restaurante de Sushi',
-      image: 'https://picsum.photos/240/340',
-      rating: 4.7,
-      likes: 25,
-    },
-    {
-      name: 'Cafeteria',
-      image: 'https://picsum.photos/250/250',
-      rating: 4.2,
-      likes: 15,
-    },
-    {
-      name: 'Padaria Delícia',
-      image: 'https://picsum.photos/270/270',
-      rating: 4.6,
-      likes: 8,
-    },
-    {
-      name: 'Paraíso do Sorvete',
-      image: 'https://picsum.photos/280/280',
-      rating: 4.8,
-      likes: 20,
-    },
-    {
-      name: 'Café no Parque',
-      image: 'https://picsum.photos/220/220',
-      rating: 4.4,
-      likes: 14,
-    },
-    {
-      name: 'Trattoria Italiana',
-      image: 'https://picsum.photos/230/230',
-      rating: 4.6,
-      likes: 22,
-    },
-    {
-      name: 'Cantina Mexicana',
-      image: 'https://picsum.photos/240/240',
-      rating: 4.3,
-      likes: 17,
-    },
-    {
-      name: 'Churrascaria',
-      image: 'https://picsum.photos/250/250',
-      rating: 4.7,
-      likes: 28,
-    },
-    {
-      name: 'Cozinha Tailandesa',
-      image: 'https://picsum.photos/260/260',
-      rating: 4.5,
-      likes: 19,
-    },
-  ];
+  let places: Place[] = [];
   $: currentUser = users.find((x) => x.id === selectedUser);
 
   onMount(() => {
@@ -147,6 +82,20 @@
       ];
     });
   });
+
+  $: if (currentUser) {
+    api.get(`/recommend/${selectedUser}`).then((res) => {
+      const data = res.data.data;
+
+      places = data.map((place: any) => ({
+        id: place.id,
+        name: place.name,
+        image: place.image,
+        rating: place.rating,
+        likes: place.likes,
+      }));
+    });
+  }
 
   function handleHelp() {
     const modal: ModalSettings = {

@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { api } from '$lib/api';
+
   interface Place {
+    id: number;
     name: string;
     image: string;
     likes: number;
@@ -10,6 +13,10 @@
 
   function handleLike() {
     isFilled = !isFilled;
+
+    api.post(`/local/${place.id}/like`).then((res) => {
+      place.likes += 1;
+    });
   }
 </script>
 
