@@ -7,7 +7,7 @@
     image: string;
     metrics: {
       id: number;
-      name: string;
+      label: string;
       interactions: number;
     }[];
   }
@@ -52,11 +52,20 @@
 
         <span class="text-sm mt-2">Gosta de:</span>
         <div class="flex items-center mt-1 gap-2">
-          {#each user.metrics as metric}
-            <span
-              class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
-              >{metric.name}</span
-            >
+          {#each user.metrics as metric, i}
+            {#if i < 1}
+              <span
+                class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
+                >{metric.label}</span
+              >
+            {/if}
+
+            {#if i == 2}
+              <span
+                class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
+                >+{user.metrics.length - 4}</span
+              >
+            {/if}
           {/each}
         </div>
       </div>

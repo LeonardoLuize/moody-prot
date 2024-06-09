@@ -6,65 +6,21 @@
   import { onMount } from 'svelte';
   import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
+  interface User {
+    id: number;
+    name: string;
+    image: string;
+    metrics: {
+      id: number;
+      label: string;
+      interactions: number;
+    }[];
+  }
+
   const modalStore = getModalStore();
 
   let selectedUser = 1;
-  let users = [
-    {
-      id: 1,
-      name: 'Ullyses',
-      image:
-        'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      metrics: [
-        {
-          id: 1,
-          name: 'Café',
-          interactions: 10,
-        },
-        {
-          id: 2,
-          name: 'Sushi',
-          interactions: 5,
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Rachel',
-      metrics: [
-        {
-          id: 1,
-          name: 'Bar',
-          interactions: 10,
-        },
-        {
-          id: 2,
-          name: 'Pizza',
-          interactions: 5,
-        },
-      ],
-      image:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      id: 3,
-      name: 'Zach',
-      metrics: [
-        {
-          id: 1,
-          name: 'Café',
-          interactions: 10,
-        },
-        {
-          id: 2,
-          name: 'Pizza',
-          interactions: 5,
-        },
-      ],
-      image:
-        'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=2823&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-  ];
+  let users: User[] = [];
   let places = [
     {
       name: 'Café do Ponto',
@@ -142,43 +98,53 @@
   $: currentUser = users.find((x) => x.id === selectedUser);
 
   onMount(() => {
-    api.get('/users/1').then((res) => {
+    api.get('/user/1').then((res) => {
       const user = res.data.data;
-      users.push({
-        id: user.id,
-        name: 'Ulysses',
-        image:
-          'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        musicGenre: user.music_genre,
-        age: user.age,
-        metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
-      });
+
+      users = [
+        ...users,
+        {
+          id: Number(user.user_id),
+          name: 'Ulysses',
+          image:
+            'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          musicGenre: user.music_genre,
+          age: user.age,
+          metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
+        },
+      ];
     });
 
-    api.get('/users/2').then((res) => {
+    api.get('/user/2').then((res) => {
       const user = res.data.data;
-      users.push({
-        id: user.id,
-        name: 'Rachel',
-        image:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        musicGenre: user.music_genre,
-        age: user.age,
-        metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
-      });
+      users = [
+        ...users,
+        {
+          id: Number(user.user_id),
+          name: 'Rachel',
+          image:
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          musicGenre: user.music_genre,
+          age: user.age,
+          metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
+        },
+      ];
     });
 
-    api.get('/users/3').then((res) => {
+    api.get('/user/3').then((res) => {
       const user = res.data.data;
-      users.push({
-        id: user.id,
-        name: 'Zach',
-        image:
-          'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=2823&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        musicGenre: user.music_genre,
-        age: user.age,
-        metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
-      });
+      users = [
+        ...users,
+        {
+          id: Number(user.user_id),
+          name: 'Zach',
+          image:
+            'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=2823&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          musicGenre: user.music_genre,
+          age: user.age,
+          metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
+        },
+      ];
     });
   });
 
@@ -186,7 +152,7 @@
     const modal: ModalSettings = {
       type: 'confirm',
       title: 'Como Usar?',
-      body: 'Esse é o protótipo do nosso motor de recomendação de lugares, para utilizar basta selecionar um usuário e intergir com as recomendações ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos.',
+      body: 'Esse é o protótipo do nosso motor de recomendação de lugares, para utilizar basta selecionar um usuário e intergir com as recomendações, ao dar likes nos lugares a recomendação pode mudar e gerar novos resultados únicos.',
     };
     modalStore.trigger(modal);
     localStorage.setItem('help', 'true');
@@ -220,7 +186,7 @@
   <main class="flex w-full items-center flex-col px-5 md:px-0">
     <div class="max-w-[1200px] w-full mt-10">
       <h1 class="text-xl">Selecione um usuário:</h1>
-      <SelectUser {users} bind:selectedUser />
+      <SelectUser bind:users bind:selectedUser />
     </div>
 
     {#if selectedUser != 0}
