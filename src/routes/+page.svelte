@@ -105,7 +105,7 @@
     modalBody +=
       "<p class='py-3 px-5 bg-primary-200 text-primary-600 border-2 border-primary-500 mt-5 rounded-xl'>";
     modalBody +=
-      'Importante ressaltar que a ideia do protótipo é mostrar como o motor de recomendação funciona, portanto não é possível navegar pelos lugares e por mias que os dados venham da api eles são fictícios.';
+      'Importante ressaltar que a ideia do protótipo é mostrar como o motor de recomendação funciona, portanto não é possível navegar pelos lugares e por mais que os dados venham da api eles são fictícios.';
     modalBody += '</p>';
 
     const modal: ModalSettings = {
