@@ -10,9 +10,10 @@
     liked?: boolean;
   }
   export let place: Place;
+  export let userId: number
 
   function handleLike() {
-    api.post(`/local/${place.id}/like`).then((res) => {
+    api.post(`/local/${place.id}/like/${userId}`).then((res) => {
       place.likes += 1;
       place.liked = true;
     });

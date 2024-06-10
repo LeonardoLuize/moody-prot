@@ -86,7 +86,7 @@
   $: if (currentUser) {
     api.get(`/recommend/${selectedUser}`).then((res) => {
       const data = res.data.recommendation;
-      
+
       places = data.map((place: any) => ({
         id: place.place_id,
         name: place.name,
@@ -157,7 +157,7 @@
 
         <div class="w-full flex flex-wrap items-start gap-10 my-10">
           {#each places as place}
-            <Place {place} />
+            <Place {place} bind:userId={currentUser.id} />
           {/each}
         </div>
       </div>
