@@ -12,6 +12,7 @@
     image: string;
     musicGenre: string;
     age: string;
+    perfil: string;
     metrics: {
       id: number;
       label: string;
@@ -47,6 +48,7 @@
             'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           musicGenre: user.music_genre,
           age: user.age,
+          perfil: user.perfil,
           metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
         },
       ];
@@ -63,6 +65,7 @@
             'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           musicGenre: user.music_genre,
           age: user.age,
+          perfil: user.perfil,
           metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
         },
       ];
@@ -79,6 +82,7 @@
             'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=2823&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           musicGenre: user.music_genre,
           age: user.age,
+          perfil: user.perfil,
           metrics: user.metrics.sort((a, b) => b.interactions - a.interactions),
         },
       ];

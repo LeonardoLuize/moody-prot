@@ -7,6 +7,7 @@
     image: string;
     musicGenre: string;
     age: string;
+    perfil: string;
     metrics: {
       id: number;
       label: string;
@@ -49,11 +50,11 @@
 
         <div class="flex gap-3">
           <section>
-            <span class="text-sm mt-2">Gosta de:</span>
+            <span class="text-sm mt-2">Perfil do usuário:</span>
             <div class="flex items-center mt-1 gap-2">
               <span
                 class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
-                >{user.musicGenre}</span
+                >{user.perfil}</span
               >
             </div>
           </section>
