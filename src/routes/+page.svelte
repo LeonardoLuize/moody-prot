@@ -30,13 +30,18 @@
 
   const modalStore = getModalStore();
 
+  let isLoading = false;
+  let isLoadingPlaces = false;
   let selectedUser = 1;
   let users: User[] = [];
   let places: Place[] = [];
   $: currentUser = users.find((x) => x.id === selectedUser);
 
   onMount(() => {
+    isLoading = true;
+
     api.get('/user/1').then((res) => {
+      isLoading = false;
       const user = res.data.data;
 
       users = [
@@ -90,6 +95,7 @@
   });
 
   $: if (currentUser) {
+    isLoadingPlaces = true;
     api.get(`/recommend/${selectedUser}`).then((res) => {
       const data = res.data.recommendation;
 
@@ -100,6 +106,8 @@
         rating: place.rating,
         likes: place.likes,
       }));
+
+      isLoadingPlaces = false;
     });
   }
 
@@ -150,10 +158,18 @@
   </header>
 
   <main class="flex w-full items-center flex-col px-5 md:px-0">
-    <div class="max-w-[1200px] w-full mt-10">
-      <h1 class="text-xl">Selecione um usuário:</h1>
-      <SelectUser bind:users bind:selectedUser />
-    </div>
+    {#if isLoading}
+      <div class="w-full flex justify-center items-center h-[80vh]">
+        <div
+          class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary-500"
+        />
+      </div>
+    {:else}
+      <div class="max-w-[1200px] w-full mt-10">
+        <h1 class="text-xl">Selecione um usuário:</h1>
+        <SelectUser bind:users bind:selectedUser />
+      </div>
+    {/if}
 
     {#if selectedUser != 0}
       <div class="max-w-[1200px] w-full mt-10">
@@ -161,11 +177,19 @@
           Lugares selecionados para {currentUser && currentUser.name}:
         </h2>
 
-        <div class="w-full flex flex-wrap items-start gap-10 my-10">
-          {#each places as place}
-            <Place {place} bind:userId={currentUser.id} />
-          {/each}
-        </div>
+        {#if isLoadingPlaces}
+          <div class="w-full flex justify-center items-center h-[80vh]">
+            <div
+              class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary-500"
+            />
+          </div>
+        {:else}
+          <div class="w-full flex flex-wrap items-start gap-10 my-10">
+            {#each places as place}
+              <Place {place} bind:userId={currentUser.id} />
+            {/each}
+          </div>
+        {/if}
       </div>
     {/if}
   </main>
