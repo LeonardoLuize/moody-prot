@@ -88,7 +88,7 @@
       const data = res.data.data;
 
       places = data.map((place: any) => ({
-        id: place.id,
+        id: place.place_id,
         name: place.name,
         image: place.image,
         rating: place.rating,
