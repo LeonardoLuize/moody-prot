@@ -7,15 +7,14 @@
     image: string;
     likes: number;
     rating: number;
+    liked?: boolean;
   }
   export let place: Place;
-  let isFilled = false;
 
   function handleLike() {
-    isFilled = !isFilled;
-
     api.post(`/local/${place.id}/like`).then((res) => {
       place.likes += 1;
+      place.liked = true;
     });
   }
 </script>
@@ -40,7 +39,7 @@
       >
         <span
           class={`material-symbols-rounded text-primary-700 ${
-            isFilled ? 'filled' : ''
+            place.liked ? 'filled' : ''
           }`}
         >
           thumb_up

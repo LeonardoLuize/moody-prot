@@ -85,8 +85,8 @@
 
   $: if (currentUser) {
     api.get(`/recommend/${selectedUser}`).then((res) => {
-      const data = res.data.data;
-
+      const data = res.data.recommendation;
+      
       places = data.map((place: any) => ({
         id: place.place_id,
         name: place.name,
