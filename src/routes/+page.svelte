@@ -10,6 +10,8 @@
     id: number;
     name: string;
     image: string;
+    musicGenre: string;
+    age: string;
     metrics: {
       id: number;
       label: string;

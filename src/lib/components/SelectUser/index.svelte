@@ -5,6 +5,8 @@
     id: number;
     name: string;
     image: string;
+    musicGenre: string;
+    age: string;
     metrics: {
       id: number;
       label: string;
@@ -45,23 +47,25 @@
       <div class="flex flex-col">
         <span class="text-gray-700 font-bold">{user.name}</span>
 
-        <span class="text-sm mt-2">Gosta de:</span>
-        <div class="flex items-center mt-1 gap-2">
-          {#each user.metrics as metric, i}
-            {#if i < 1}
+        <div class="flex gap-3">
+          <section>
+            <span class="text-sm mt-2">Gosta de:</span>
+            <div class="flex items-center mt-1 gap-2">
               <span
                 class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
-                >{metric.label}</span
+                >{user.musicGenre}</span
               >
-            {/if}
-
-            {#if i == 2}
+            </div>
+          </section>
+          <section>
+            <span class="text-sm mt-2">Idade:</span>
+            <div class="flex items-center mt-1 gap-2">
               <span
                 class="bg-secondary-200 py-1 px-2 text-sm rounded-xl border-2 border-secondary-500"
-                >+{user.metrics.length - 4}</span
+                >{user.age}</span
               >
-            {/if}
-          {/each}
+            </div>
+          </section>
         </div>
       </div>
     </label>
