@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-	baseURL: 'https://moody-recomendation-service.vercel.app/v1'
+	baseURL: 'https://moody-service.vercel.app/v1'
 });
